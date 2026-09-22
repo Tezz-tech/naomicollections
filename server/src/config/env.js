@@ -13,6 +13,13 @@ export const env = {
   apiUrl: required('API_URL', 'http://localhost:5000'),
   clientUrl: required('CLIENT_URL', 'http://localhost:5173'),
   adminUrl: required('ADMIN_URL', 'http://localhost:5173/admin'),
+  // Extra origins allowed to call the API besides CLIENT_URL/ADMIN_URL — e.g.
+  // a platform default domain (my-app.vercel.app) alongside a custom domain,
+  // or the apex + www variants of the same domain. Comma-separated.
+  extraAllowedOrigins: required('EXTRA_ALLOWED_ORIGINS', '')
+    .split(',')
+    .map((o) => o.trim())
+    .filter(Boolean),
 
   mongoUri: required('MONGO_URI', 'mongodb://127.0.0.1:27017/naomis-collections'),
 
@@ -37,7 +44,7 @@ export const env = {
   },
 
   email: {
-    provider: required('EMAIL_PROVIDER', 'smtp'),
+    provider: required('EMAIL_PROVIDER', 'resend'),
     smtpHost: required('SMTP_HOST', ''),
     smtpPort: Number(required('SMTP_PORT', 587)),
     smtpUser: required('SMTP_USER', ''),

@@ -7,11 +7,11 @@ import mongoSanitize from 'express-mongo-sanitize';
 
 import { env } from './config/env.js';
 import { connectDB } from './config/db.js';
-import { notFound, errorHandler } from './middleware/errorHandler.js';
+import { notFound, errorHandler, ApiError } from './middleware/errorHandler.js';
 
 const app = express();
 
-const allowedOrigins = [env.clientUrl, env.adminUrl].filter(Boolean);
+const allowedOrigins = [env.clientUrl, env.adminUrl, ...env.extraAllowedOrigins].filter(Boolean);
 
 app.use(helmet());
 app.use(
@@ -20,7 +20,7 @@ app.use(
       if (!origin || allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
-      return callback(new Error('Not allowed by CORS'));
+      return callback(new ApiError(403, `Origin ${origin} is not allowed to access this API.`));
     },
     credentials: true,
   })
