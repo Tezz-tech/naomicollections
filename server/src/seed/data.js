@@ -1,0 +1,255 @@
+// Placeholder imagery (picsum.photos, seeded for stable/consistent results)
+// stands in for real product photography until the admin uploads real
+// images through Cloudinary.
+function img(seed) {
+  return { url: `https://picsum.photos/seed/${seed}/900/1200`, alt: seed.replace(/-/g, ' ') };
+}
+
+export const bannersSeed = [
+  {
+    title: 'The New Season Edit',
+    subtitle: "Curated for the way you want to be seen.",
+    image: img('hero-1'),
+    ctaText: 'Shop New Arrivals',
+    ctaLink: '/shop?isNewArrival=true',
+    position: 'hero',
+    sortOrder: 1,
+  },
+  {
+    title: 'Tailored Menswear',
+    subtitle: 'Precision-cut pieces for the modern gentleman.',
+    image: img('hero-2'),
+    ctaText: 'Shop Men’s Wear',
+    ctaLink: '/shop',
+    position: 'hero',
+    sortOrder: 2,
+  },
+  {
+    title: 'Bulk Orders, Curated Rates',
+    subtitle: 'Tiered pricing for businesses, events, and resellers.',
+    image: img('hero-3'),
+    ctaText: 'Explore Bulk Deals',
+    ctaLink: '/bulk-orders',
+    position: 'hero',
+    sortOrder: 3,
+  },
+];
+
+export const categoriesSeed = [
+  {
+    name: "Men's Wear",
+    description: 'Tailored suits, shirts, and everyday essentials for the modern gentleman.',
+    sortOrder: 1,
+  },
+  {
+    name: 'Dresses',
+    description: 'Evening wear, occasion dresses, and everyday silhouettes.',
+    sortOrder: 2,
+  },
+  {
+    name: 'Shoes',
+    description: 'Loafers, heels, sneakers, and formal footwear.',
+    sortOrder: 3,
+  },
+  {
+    name: 'Accessories',
+    description: 'Bags, belts, jewelry, and finishing touches.',
+    sortOrder: 4,
+  },
+];
+
+// categorySlug references the categoriesSeed entries by slugified name.
+export const productsSeed = [
+  {
+    categorySlug: "mens-wear",
+    name: 'Tailored Wool Blazer',
+    description:
+      'A precision-cut wool blazer in midnight black, finished with horn buttons and a half-canvas construction for a silhouette that holds its shape.',
+    shortDescription: 'Precision-cut wool blazer, half-canvas construction.',
+    images: [img('blazer-1'), img('blazer-2')],
+    basePrice: 85000,
+    compareAtPrice: 98000,
+    saleType: 'single',
+    status: 'published',
+    isFeatured: true,
+    variants: [
+      { size: 'M', color: 'Black', sku: 'NC-BLZ-BLK-M', stock: 6 },
+      { size: 'L', color: 'Black', sku: 'NC-BLZ-BLK-L', stock: 8 },
+      { size: 'XL', color: 'Black', sku: 'NC-BLZ-BLK-XL', stock: 4 },
+    ],
+    tags: ['blazer', 'formal', 'wool'],
+  },
+  {
+    categorySlug: "mens-wear",
+    name: 'Classic Oxford Shirt',
+    description:
+      'A crisp cotton Oxford shirt built for the boardroom and beyond. Mother-of-pearl buttons, reinforced collar.',
+    shortDescription: 'Crisp cotton Oxford shirt, reinforced collar.',
+    images: [img('shirt-1'), img('shirt-2')],
+    basePrice: 24000,
+    saleType: 'both',
+    minOrderQuantity: 10,
+    bulkTiers: [
+      { minQty: 10, maxQty: 49, pricePerUnit: 20000 },
+      { minQty: 50, pricePerUnit: 17000 },
+    ],
+    status: 'published',
+    isNewArrival: true,
+    variants: [
+      { size: 'S', color: 'White', sku: 'NC-OXF-WHT-S', stock: 20 },
+      { size: 'M', color: 'White', sku: 'NC-OXF-WHT-M', stock: 30 },
+      { size: 'L', color: 'White', sku: 'NC-OXF-WHT-L', stock: 25 },
+      { size: 'M', color: 'Sky Blue', sku: 'NC-OXF-BLU-M', stock: 18 },
+    ],
+    tags: ['shirt', 'office', 'cotton', 'bulk'],
+  },
+  {
+    categorySlug: "mens-wear",
+    name: 'Merino Crewneck Sweater',
+    description: 'Fine-gauge merino wool crewneck in charcoal grey, layers cleanly under a blazer.',
+    shortDescription: 'Fine-gauge merino wool crewneck.',
+    images: [img('sweater-1')],
+    basePrice: 42000,
+    saleType: 'single',
+    status: 'published',
+    variants: [
+      { size: 'M', color: 'Charcoal', sku: 'NC-SWT-CHR-M', stock: 10 },
+      { size: 'L', color: 'Charcoal', sku: 'NC-SWT-CHR-L', stock: 12 },
+    ],
+    tags: ['sweater', 'wool'],
+  },
+  {
+    categorySlug: 'dresses',
+    name: 'Silk Wrap Dress',
+    description:
+      'A fluid silk wrap dress that moves with you — self-tie waist, bias-cut skirt, finished hem.',
+    shortDescription: 'Fluid silk wrap dress, self-tie waist.',
+    images: [img('dress-1'), img('dress-2')],
+    basePrice: 120000,
+    compareAtPrice: 145000,
+    saleType: 'single',
+    status: 'published',
+    isFeatured: true,
+    isFlashSale: true,
+    flashSale: {
+      startDate: new Date(),
+      endDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+      discountPercent: 15,
+    },
+    variants: [
+      { size: 'S', color: 'Emerald', sku: 'NC-WRP-EMR-S', stock: 5 },
+      { size: 'M', color: 'Emerald', sku: 'NC-WRP-EMR-M', stock: 7 },
+      { size: 'M', color: 'Black', sku: 'NC-WRP-BLK-M', stock: 6 },
+    ],
+    tags: ['dress', 'silk', 'evening'],
+  },
+  {
+    categorySlug: 'dresses',
+    name: 'Structured Midi Dress',
+    description: 'A tailored midi dress with a structured bodice and a clean A-line skirt.',
+    shortDescription: 'Tailored midi dress, structured bodice.',
+    images: [img('midi-1')],
+    basePrice: 68000,
+    saleType: 'both',
+    minOrderQuantity: 15,
+    bulkTiers: [
+      { minQty: 15, maxQty: 39, pricePerUnit: 58000 },
+      { minQty: 40, pricePerUnit: 49000 },
+    ],
+    status: 'published',
+    isNewArrival: true,
+    variants: [
+      { size: 'S', color: 'Cream', sku: 'NC-MID-CRM-S', stock: 14 },
+      { size: 'M', color: 'Cream', sku: 'NC-MID-CRM-M', stock: 16 },
+    ],
+    tags: ['dress', 'midi', 'bulk'],
+  },
+  {
+    categorySlug: 'shoes',
+    name: 'Leather Penny Loafers',
+    description: 'Hand-finished leather penny loafers with a leather sole and a burnished toe.',
+    shortDescription: 'Hand-finished leather penny loafers.',
+    images: [img('loafers-1'), img('loafers-2')],
+    basePrice: 64000,
+    saleType: 'single',
+    status: 'published',
+    isFeatured: true,
+    variants: [
+      { size: '40', color: 'Brown', sku: 'NC-LOF-BRN-40', stock: 5 },
+      { size: '41', color: 'Brown', sku: 'NC-LOF-BRN-41', stock: 6 },
+      { size: '42', color: 'Brown', sku: 'NC-LOF-BRN-42', stock: 4 },
+      { size: '43', color: 'Black', sku: 'NC-LOF-BLK-43', stock: 5 },
+    ],
+    tags: ['shoes', 'leather', 'loafers'],
+  },
+  {
+    categorySlug: 'shoes',
+    name: 'Pointed Stiletto Heels',
+    description: 'A razor-sharp pointed toe stiletto in Italian faux-leather, 90mm heel.',
+    shortDescription: 'Pointed toe stiletto, 90mm heel.',
+    images: [img('heels-1')],
+    basePrice: 55000,
+    saleType: 'single',
+    status: 'published',
+    variants: [
+      { size: '37', color: 'Black', sku: 'NC-HEL-BLK-37', stock: 6 },
+      { size: '38', color: 'Black', sku: 'NC-HEL-BLK-38', stock: 8 },
+      { size: '39', color: 'Nude', sku: 'NC-HEL-NUD-39', stock: 5 },
+    ],
+    tags: ['shoes', 'heels'],
+  },
+  {
+    categorySlug: 'accessories',
+    name: 'Full-Grain Leather Belt',
+    description: 'A full-grain leather belt with a brushed-gold buckle, made to age beautifully.',
+    shortDescription: 'Full-grain leather belt, brushed-gold buckle.',
+    images: [img('belt-1')],
+    basePrice: 18000,
+    saleType: 'both',
+    minOrderQuantity: 20,
+    bulkTiers: [
+      { minQty: 20, maxQty: 99, pricePerUnit: 14000 },
+      { minQty: 100, pricePerUnit: 11000 },
+    ],
+    status: 'published',
+    variants: [
+      { size: '32', color: 'Brown', sku: 'NC-BLT-BRN-32', stock: 25 },
+      { size: '34', color: 'Brown', sku: 'NC-BLT-BRN-34', stock: 30 },
+      { size: '36', color: 'Black', sku: 'NC-BLT-BLK-36', stock: 22 },
+    ],
+    tags: ['belt', 'leather', 'bulk'],
+  },
+  {
+    categorySlug: 'accessories',
+    name: 'Structured Tote Bag',
+    description: 'A structured leather tote with a suede-lined interior and gold-tone hardware.',
+    shortDescription: 'Structured leather tote, suede-lined.',
+    images: [img('tote-1'), img('tote-2')],
+    basePrice: 96000,
+    saleType: 'single',
+    status: 'published',
+    isFeatured: true,
+    isNewArrival: true,
+    variants: [
+      { size: 'One Size', color: 'Camel', sku: 'NC-TOT-CML-OS', stock: 9 },
+      { size: 'One Size', color: 'Black', sku: 'NC-TOT-BLK-OS', stock: 11 },
+    ],
+    tags: ['bag', 'leather', 'tote'],
+  },
+  {
+    categorySlug: 'accessories',
+    name: 'Gold-Plated Signet Ring',
+    description: '18k gold-plated signet ring with a hand-engraved monogram plate.',
+    shortDescription: '18k gold-plated signet ring.',
+    images: [img('ring-1')],
+    basePrice: 15000,
+    saleType: 'single',
+    status: 'published',
+    variants: [
+      { size: '6', color: 'Gold', sku: 'NC-RNG-GLD-6', stock: 10 },
+      { size: '7', color: 'Gold', sku: 'NC-RNG-GLD-7', stock: 14 },
+      { size: '8', color: 'Gold', sku: 'NC-RNG-GLD-8', stock: 10 },
+    ],
+    tags: ['jewelry', 'ring'],
+  },
+];
