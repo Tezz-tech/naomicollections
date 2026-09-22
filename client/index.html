@@ -9,13 +9,44 @@
       content="Naomi's Collections — premium menswear, dresses, shoes and accessories. Curated for the way you want to be seen."
     />
     <meta name="theme-color" content="#0A0A0A" />
+    <title>Naomi's Collections | Curated for the way you want to be seen</title>
+
+    <!--
+      Static link-preview metadata (WhatsApp, iMessage, Slack, and most other
+      link-preview bots fetch the raw HTML and do NOT run JavaScript, so the
+      per-page tags injected at runtime by client/src/components/Seo.jsx never
+      reach them — this static block is what those previews actually read).
+      %VITE_SITE_URL% is substituted at build time by Vite's HTML env
+      replacement from client/.env's VITE_SITE_URL — keep that set to the
+      real production domain.
+    -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Naomi's Collections" />
+    <meta property="og:title" content="Naomi's Collections | Curated for the way you want to be seen" />
+    <meta
+      property="og:description"
+      content="Premium menswear, dresses, shoes and accessories — curated for the way you want to be seen."
+    />
+    <meta property="og:url" content="%VITE_SITE_URL%/" />
+    <meta property="og:image" content="%VITE_SITE_URL%/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Naomi's Collections crest" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Naomi's Collections | Curated for the way you want to be seen" />
+    <meta
+      name="twitter:description"
+      content="Premium menswear, dresses, shoes and accessories — curated for the way you want to be seen."
+    />
+    <meta name="twitter:image" content="%VITE_SITE_URL%/og-image.png" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <title>Naomi's Collections | Curated for the way you want to be seen</title>
   </head>
   <body>
     <div id="root"></div>
