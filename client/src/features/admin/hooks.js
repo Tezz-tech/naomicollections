@@ -123,6 +123,7 @@ export const useDeleteBanner = () => {
 
 // --- Uploads ---
 export const useUploadImages = () => useMutation({ mutationFn: ({ files, folder }) => api.uploadImages(files, folder) });
+export const useDeleteImage = () => useMutation({ mutationFn: api.deleteImage });
 
 // --- Emails ---
 export const useEmailLogs = (params) => useQuery({ queryKey: ['admin-email-logs', params], queryFn: () => api.fetchEmailLogs(params) });

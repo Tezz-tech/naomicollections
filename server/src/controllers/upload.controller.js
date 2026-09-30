@@ -1,29 +1,30 @@
-import streamifier from 'streamifier';
 import cloudinary from '../config/cloudinary.js';
+import { env } from '../config/env.js';
 import { catchAsync } from '../utils/catchAsync.js';
 import { ApiError } from '../middleware/errorHandler.js';
 
-function uploadBuffer(buffer, folder) {
-  return new Promise((resolve, reject) => {
-    const stream = cloudinary.uploader.upload_stream(
-      { folder: `naomis-collections/${folder}`, resource_type: 'image' },
-      (err, result) => (err ? reject(err) : resolve(result))
-    );
-    streamifier.createReadStream(buffer).pipe(stream);
-  });
-}
+const ALLOWED_FOLDERS = ['products', 'categories', 'banners', 'general'];
 
-export const uploadImages = catchAsync(async (req, res) => {
-  const files = req.files || (req.file ? [req.file] : []);
-  if (!files.length) throw new ApiError(400, 'No image files provided.');
+// The browser uploads the actual file bytes directly to Cloudinary — never
+// through this server (important on serverless, where function payload
+// size/duration are constrained). This endpoint only ever proves "an admin
+// asked for this" and hands back a short-lived signature; the API secret
+// itself never leaves the server.
+export const getUploadSignature = catchAsync(async (req, res) => {
+  const requestedFolder = req.query.folder;
+  const folder = `naomis-collections/${ALLOWED_FOLDERS.includes(requestedFolder) ? requestedFolder : 'general'}`;
+  const timestamp = Math.round(Date.now() / 1000);
 
-  const folder = req.query.folder || 'general';
-  const results = await Promise.all(files.map((f) => uploadBuffer(f.buffer, folder)));
+  const signature = cloudinary.utils.api_sign_request({ folder, timestamp }, env.cloudinary.apiSecret);
 
   res.json({
     success: true,
     data: {
-      images: results.map((r) => ({ url: r.secure_url, publicId: r.public_id })),
+      signature,
+      timestamp,
+      folder,
+      apiKey: env.cloudinary.apiKey,
+      cloudName: env.cloudinary.cloudName,
     },
   });
 });

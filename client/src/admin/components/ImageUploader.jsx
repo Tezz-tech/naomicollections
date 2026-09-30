@@ -1,11 +1,12 @@
 import { useRef } from 'react';
 import toast from 'react-hot-toast';
 import { X, Upload, Loader2 } from 'lucide-react';
-import { useUploadImages } from '../../features/admin/hooks';
+import { useUploadImages, useDeleteImage } from '../../features/admin/hooks';
 
 export default function ImageUploader({ images = [], onChange, folder = 'products' }) {
   const inputRef = useRef(null);
   const { mutate: upload, isPending } = useUploadImages();
+  const { mutate: deleteImage } = useDeleteImage();
 
   function handleFiles(e) {
     const files = Array.from(e.target.files || []);
@@ -21,7 +22,9 @@ export default function ImageUploader({ images = [], onChange, folder = 'product
   }
 
   function removeImage(idx) {
+    const removed = images[idx];
     onChange(images.filter((_, i) => i !== idx));
+    if (removed?.publicId) deleteImage(removed.publicId);
   }
 
   return (
